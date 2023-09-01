@@ -99,10 +99,11 @@ void green_up(State* state) {
 }
 
 void request_yellow_led(State* state) {
-  if (!state || state->led_state != GREEN)
+  if (!state)
     return;
 
-  state->button.state = LOW;
+  if (state->led_state == GREEN)
+    state->next = yellow_up;
 
-  state->next = yellow_up;
+  state->button.state = LOW;
 }
